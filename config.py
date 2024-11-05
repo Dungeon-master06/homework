@@ -1,6 +1,6 @@
-TOKEN = "7739788712:AAGsCfAL79jzGk53nS7gUfKTuz0AlDNwLWQ"
+TOKEN = ""
 
-DB_NAME = "tg_anekdot_bot"
+DB_NAME = "tg_joke_db"
 DB_USER = "root"
 DB_PASSWORD = "Admin"
 DB_HOST = "localhost"

@@ -8,7 +8,7 @@ from handler.for_admin import admin_router
 async def main():
     # await create_tables()
     # await add_category()
-    # await add_product()
+    # await add_joke()
     bot = Bot(token=TOKEN)
     dp = Dispatcher()
     dp.include_router(router)

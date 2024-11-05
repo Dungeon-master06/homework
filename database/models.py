@@ -15,17 +15,17 @@ class Category(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(255))
-    product= relationship('Product',back_populates="category")
+    joke= relationship('Joke',back_populates="category")
 
-class Product(Base):
-    __tablename__ = 'products'
+class Joke(Base):
+    __tablename__ = 'jokes'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(255))
     description: Mapped[str] = mapped_column(Text)
-    image: Mapped[str] = mapped_column(String(255), nullable=False)
+    image: Mapped[str] = mapped_column(String(255), nullable=True)
     category_id: Mapped[int] = mapped_column(ForeignKey('categorys.id'))
-    category= relationship('Category',back_populates="product")
+    category= relationship('Category',back_populates="joke")
 
 
 async def create_tables():
@@ -41,16 +41,16 @@ async def add_category():
         await session.refresh(category)
         return category
     
-async def add_product():
+async def add_joke():
     async with async_session() as session:
-        product = Product(
+        joke = Joke(
             name='На собрании разработчиков:',
             description='Если вы считаете свою работу никчёмной, вспомните, что где-то в России есть сотрудник, считающий суммарный долг компании Гугл.',
             image='image/zebra.png',
             category_id=1
         )
-        session.add(product)
+        session.add(joke)
         await session.commit()
-        await session.refresh(product)
-        return product
+        await session.refresh(joke)
+        return joke
     

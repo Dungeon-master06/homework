@@ -9,19 +9,19 @@ async def get_categories():
     
 async def get_products():
     async with async_session() as session:
-        result = await session.scalars(select(Product))
-        return result
+        result = await session.scalars(select(Joke))
+        return result.all()
     
 async def get_category(category_id):
     async with async_session() as session:
-        result = await session.scalars(select(Product).where(Product.category_id == category_id))
+        result = await session.scalars(select(Joke).where(Joke.category_id == category_id))
         return result
     
-
 async def get_product(product_id):
     async with async_session() as session:
-        result =await session.scalar(select(Product).where(Product.id == product_id))
+        result =await session.scalar(select(Joke).where(Joke.id == product_id))
         return result
+    
 async def add_category(text):
     async with async_session() as session:
         category = Category(name = text)
@@ -30,7 +30,7 @@ async def add_category(text):
         await session.refresh(category)
         return category
 
-async def add_product_db(data):
+async def add_anekdot_db(data):
     async with async_session() as session:
         session.add(data)
         await session.commit()
