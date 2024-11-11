@@ -7,7 +7,7 @@ async def get_categories():
         result = await session.scalars(select(Category))
         return result
     
-async def get_products():
+async def get_anekdots():
     async with async_session() as session:
         result = await session.scalars(select(Joke))
         return result.all()
@@ -37,6 +37,22 @@ async def add_anekdot_db(data):
         await session.refresh(data)
         return data
     
+async def add_anekdot_db(data2):
+    async with async_session() as session:
+        session.add(data2)
+        await session.commit()
+        await session.refresh(data2)
+        return data2
 
+
+async def delete_category_db(category_id):
+    async with async_session() as session:
+        await session.execute(delete(Category).where(Category.id == category_id))
+        await session.commit()
+
+async def delete_anekdot_db(anekdot_id):
+    async with async_session() as session:
+        await session.execute(delete(Category).where(Category.id == anekdot_id))
+        await session.commit()
 
     
